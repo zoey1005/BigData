@@ -1,0 +1,17 @@
+# 定位到hadoop streaming jar包所在的位置
+STREAM_JAR_PATH = '/root/bigdata/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.9.1.jar'
+# 要进行词频统计的文档在hdfs中的路径
+INPUT_FILE_PATH = '/test.txt'
+# MR作业后结果的存放路径
+OUTPUT_PATH = '/output'
+
+# 输出路径如果之前存在，先删掉否则会报错
+hadoop fs -rm -r -skipTrash $OUTPUT_PATH
+
+hadoop jar $STREAM_JAR_PATH \
+		 -input $INPUT_FILE_PATH_1 \ # 指定输入文件位置
+		 -output $OUTPUT_PATH \ #指定输出结果位置
+		 -mapper “python mapper.py” \ #指定mapper执行的程序
+		 -reducer “python reducer.py” \ # 指定reducer执行的程序
+		 -file ./map.py \		#通过-file 把python源文件分发到集群的每一台机器上
+		 -file ./red.py \

@@ -1,0 +1,9 @@
+# 本地测试
+python mrjob文件.py 需要处理的文件所在位置
+
+# 提交到Hadoop集群处理
+python word_count.py -r hadoop hdfs:///要统计的文件在Hadoop的位置 -o hdfs：///输出结果保存的位置
+
+# 如果在虚拟环境下运行mrjob可能报错，需要加虚拟环境
+python word_count.py -r hadoop hdfs:///test.txt -o hdfs:///output --python-bin/...
+
